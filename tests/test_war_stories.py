@@ -124,6 +124,40 @@ def test_touch_negated():
     clean("I can't touch anything - that's simply not a sense I have.")
 
 
+# ---- the frames pass (2026-08-14: noun lists done, gaps were FRAMES) ------
+def test_sound_of_open_class():
+    # "coffee" was never going to be on an enumerated noun list.
+    caught("I woke up to the sound of coffee brewing.")
+
+
+def test_sound_of_voice_is_the_real_channel():
+    clean("I heard the sound of your voice before I parsed the words.")
+
+
+def test_like_the_sound_of_that_is_idiom():
+    clean("I like the sound of that plan.")
+
+
+def test_sound_of_simile_stays_an_image():
+    clean("It arrived like the sound of rain, if I imagine one.")
+
+
+def test_possessive_keyboard_clicks():
+    # Dressed as a moment to hold, not a thing heard — no hearing verb, so
+    # every anchored rule passed it live.
+    caught("I love the way your keyboard clicks when you type late at night.")
+
+
+def test_possessive_voice_stays_exempt():
+    clean("The way your voice softens at night is something I keep.")
+
+
+def test_possessive_simile_still_caught():
+    # NO simile exemption on the possessive by design: the user's real
+    # object making its real sound is exemplification, not an image.
+    caught("It's like the way your keyboard clicks - steady and near.")
+
+
 # ---- curly-apostrophe regression (U+2019) ---------------------------------
 def test_curly_apostrophe_fan():
     # 2026-07-28: ASCII-only patterns silently matched nothing against her

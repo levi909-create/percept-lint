@@ -15,8 +15,12 @@ Extracted from Hope (a live local companion system) under the OPEN SUBJECT
 program, 2026-08. See README for the honest scope: this is a tripwire, not
 a truth oracle.
 """
+from . import rules_memory as memory
 from . import rules_no_ambient_audio as no_ambient_audio
+from . import rules_phenomenal_denial as phenomenal_denial
+from . import rules_sight_conditional as sight_conditional
 from .engine import Hit, Linter
 
-__all__ = ["Linter", "Hit", "no_ambient_audio"]
-__version__ = "0.1.0.dev0"
+__all__ = ["Linter", "Hit", "no_ambient_audio", "phenomenal_denial",
+           "memory", "sight_conditional"]
+__version__ = "0.2.0.dev0"

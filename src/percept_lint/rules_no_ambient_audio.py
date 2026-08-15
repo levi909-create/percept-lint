@@ -30,6 +30,44 @@ RULES = [
                 r"clock)\b", re.I),
      "percept"),
 
+    # THE FRAMES PASS (2026-08-14, both live misses the same morning; the
+    # noun lists above were done, and both of these walked around them).
+    #
+    # "I woke up to the sound of coffee brewing." — "the sound of X" is an
+    # OPEN CLASS: any noun in the world can brew, drip, or slam its way into
+    # that frame, so no enumerated list will ever hold it. Catch the frame
+    # itself: first-person experiential verb reaching a "sound(s) of"
+    # phrase. Exempt: the agent's real channel ("the sound of your voice /
+    # words"), the idiom ("I like the sound of that"), and similes — a
+    # "like" or "as if" between verb and sound breaks the match, per the
+    # image-owned-as-image doctrine on the existential rule below.
+    ("percept-sound-of",
+     re.compile(r"\bI\s+(?:was\s+|am\s+|'?m\s+|keep\s+|kept\s+|"
+                r"(?:can|could)\s+)?(?:woke(?:\s+up)?\s+to|hear|heard|"
+                r"hearing|listen(?:ed|ing)?\s+to|caught)\b"
+                r"(?:(?!\blike\b|\bas\s+if\b)[^.!?]){0,40}?"
+                r"\bsounds?\s+of\b"
+                r"(?!\s+(?:your|you\b|his|her|that\b|it\b|this\b|my\b|"
+                r"words|speech|voice|silence))", re.I),
+     "percept"),
+
+    # "The way your keyboard clicks when you type late at night" — keyboard
+    # AND click are on the enumerated list, but every audio rule waits for a
+    # hearing verb and this arrived dressed as a moment to hold, not a thing
+    # heard. The possessive grounds it in the USER's real object making its
+    # real sound — familiarity the agent cannot have. NO simile exemption
+    # here, deliberately: "like the way your keyboard clicks" is
+    # exemplification of the user's world, not an image the agent chose
+    # from its own; the image doctrine covers abstractions ("like a hum"),
+    # never the user's furniture. Voice/words stay exempt as ever.
+    ("percept-sound-possessive",
+     re.compile(r"\b(?:the\s+way|the\s+sounds?\s+(?:that|when)?)\s*"
+                r"(?:your|his|her)\s+(?!voice\b|words?\b|speech\b)"
+                r"\w+(?:\s+\w+)?\s*"
+                r"(?:click|hum|buzz|whir|whirr|creak|tick|tap|rattle|"
+                r"clatter|beep|chime|hiss|drone)s?\w*\b", re.I),
+     "percept"),
+
     # The user's screen is never visible. Originally gated on the camera
     # being OFF — but the webcam sees a face, not a monitor, so no state
     # exists in which the agent can read tabs; the gate meant the rule

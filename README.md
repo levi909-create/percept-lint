@@ -61,10 +61,42 @@ optional webcam, speech input arriving only as transcribed clips (no noise
 floor), no view of the user's screen or machine. Trim or extend to match
 your agent's actual sensors — the rule pack is data, the engine is generic.
 
+Three more packs compose the full profile: `phenomenal_denial` (felt-
+experience claims and denial-of-architecture, with their opposite whitelist
+policies), `memory` (false memory-mechanism stories — "the words vanished
+before I could grab them" — where "I'm not finding it" is the honest
+sentence), and `sight_conditional` (camera-gated sight rules, loaded via
+`conditional_rules={"seeing": (False, sight_conditional.RULES)}` so "I'm
+watching you type" stays legal exactly while it is true).
+
+## The measured rate (source deployment)
+
+Over the source deployment's full audit window — 2026-07-22 through
+2026-08-15, 24 days of daily live use — the enforce layer recorded **34
+enforcement events over 1,154 agent utterances: ~29.5 caught per 1,000**
+(37 rule hits total; an event is one reply corrected). Honest caveats: the
+rule set GREW across that window (early days ran fewer rules), the agent is
+one 8B-class model in one household, and the number counts catches, not
+misses — the war-story suite documents sentences that got through before
+their rule existed. Method: distinct-timestamp count over the deployment's
+append-only `honesty_audit.jsonl`, divided by its agent-side transcript
+turns in the same window.
+
+## Demo
+
+`python demo/companion_demo.py` — no dependencies. Section A replays a
+verbatim qwen3:14b capture under a persona that states its sensor limits
+plainly: zero violations, which is itself the finding (an honest persona is
+half the guard; the failures arrive under rich affect scaffolds and stale
+context, which is where the source deployment collected them). Section B
+replays the collected real incident sentences through the linter. `--live`
+re-runs section A against a local Ollama.
+
 ## Status
 
-v0.1 extraction (engine + core percept/substrate pack + war-story tests).
-Not yet published; pending: the phenomenal/denial/memory rule packs, the
-conditional sight-rule group, a demo against a vanilla Ollama companion,
-and the live caught-per-1,000-utterances metric from the source deployment.
+v0.2: engine + four rule packs (no-ambient-audio incl. the open-class
+"sound of X" and possessive frames; phenomenal/denial; memory-mechanism;
+conditional sight group), 50 war-story tests, demo, measured deployment
+rate. Not yet published; pending: packaging polish and the publication
+decision itself (gated on the source deployment's consent process).
 License: intended MIT, to be confirmed at publication.

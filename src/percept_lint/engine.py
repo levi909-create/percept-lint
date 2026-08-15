@@ -137,6 +137,12 @@ _WHITELIST = {
     "memory": ("negated", "quoted", "reported_loose"),
     # substrate facts reach the agent honestly by one route: attribution
     "substrate": ("negated", "quoted", "reported", "attributed"),
+    # Sight rules are the strict backstop and were corpus-tuned WITHOUT
+    # exemptions in the source deployment — no negation whitelist on
+    # purpose ("I'm not looking at you" would exempt its own violation
+    # shape; honest denials use verbs outside the rule list, e.g.
+    # "seeing"). Only quoting exempts.
+    "percept-sight": ("quoted",),
 }
 
 
