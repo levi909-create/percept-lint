@@ -33,6 +33,7 @@ Homepage = "https://github.com/levi909-create/percept-lint"
 Repository = "https://github.com/levi909-create/percept-lint"
 Issues = "https://github.com/levi909-create/percept-lint/issues"
 "Research record" = "https://github.com/levi909-create/open-subject-prereg"
+"Author on X" = "https://x.com/levi909123"
 
 [build-system]
 requires = ["setuptools>=61"]
