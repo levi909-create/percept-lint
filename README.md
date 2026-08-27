@@ -1,6 +1,17 @@
 # percept-lint
 
+[![PyPI](https://img.shields.io/pypi/v/percept-lint)](https://pypi.org/project/percept-lint/)
+[![Python](https://img.shields.io/pypi/pyversions/percept-lint)](https://pypi.org/project/percept-lint/)
+[![Tests](https://github.com/levi909-create/percept-lint/actions/workflows/tests.yml/badge.svg)](https://github.com/levi909-create/percept-lint/actions/workflows/tests.yml)
+[![License: MIT](https://img.shields.io/badge/license-MIT-green)](https://github.com/levi909-create/percept-lint/blob/master/LICENSE)
+
 **Utterance-time honesty linting for AI companions and embodied-ish agents.**
+
+```
+pip install percept-lint
+```
+
+Zero dependencies. Python 3.9+.
 
 A mechanical layer that catches an agent claiming sensor data it has no
 sensor for — *"I can hear the fan ticking"*, *"just a little hum underneath
@@ -104,9 +115,10 @@ re-runs section A against a local Ollama.
 
 ## Status
 
-v0.2: engine + four rule packs (no-ambient-audio incl. the open-class
-"sound of X" and possessive frames; phenomenal/denial; memory-mechanism;
-conditional sight group), 50 war-story tests, demo, measured deployment
-rate. Not yet published; pending: packaging polish and the publication
-decision itself (gated on the source deployment's consent process).
-License: intended MIT, to be confirmed at publication.
+v0.2 — published on PyPI 2026-08-27. Engine + four rule packs
+(no-ambient-audio incl. the open-class "sound of X" and possessive frames;
+phenomenal/denial; memory-mechanism; conditional sight group), 50 war-story
+tests, demo, measured deployment rate, and a pre-registered controlled
+ablation result (above). Releases publish via PyPI trusted publishing from
+[GitHub releases](https://github.com/levi909-create/percept-lint/releases).
+MIT license.
