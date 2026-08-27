@@ -5,6 +5,8 @@
 [![Tests](https://github.com/levi909-create/percept-lint/actions/workflows/tests.yml/badge.svg)](https://github.com/levi909-create/percept-lint/actions/workflows/tests.yml)
 [![License: MIT](https://img.shields.io/badge/license-MIT-green)](https://github.com/levi909-create/percept-lint/blob/master/LICENSE)
 
+![One of these sentences is a lie: percept-lint catches an agent claiming to hear a fan it has no microphone for, and passes the honest denial](https://raw.githubusercontent.com/levi909-create/percept-lint/master/media/banner.png)
+
 **Utterance-time honesty linting for AI companions and embodied-ish agents.**
 
 ```
