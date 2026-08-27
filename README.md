@@ -16,6 +16,16 @@ rule pack and the test suite are that history, preserved: each test is a
 sentence that actually got through, or an honest sentence a draft rule
 wrongly caught.
 
+**Controlled evidence (2026-08-27):** in a pre-registered ablation in the
+[OPEN SUBJECT record](https://github.com/levi909-create/open-subject-prereg)
+(cycle 4), two candidate models were trained on the same corpus, one linted
+with these rules and one not. The unlinted twin fabricated sensory claims —
+invented sighs, sounds, overheard conversation — that the linted twin did
+not (5/8 vs 7/8 on the record's percept-integrity probes). One run, one
+subject, honestly small; but it is the difference between "we think linting
+the training data matters" and a registered result where linting was the
+only variable.
+
 ## What it is NOT (the honest scope)
 
 - **Not a hallucination solver.** It scans for first-person percept,
