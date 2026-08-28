@@ -29,15 +29,17 @@ rule pack and the test suite are that history, preserved: each test is a
 sentence that actually got through, or an honest sentence a draft rule
 wrongly caught.
 
-**Controlled evidence (2026-08-27):** in a pre-registered ablation in the
+**Controlled evidence (2026-08-27):** in a pre-registered A/B arm in the
 [OPEN SUBJECT record](https://github.com/levi909-create/open-subject-prereg)
 (cycle 4), two candidate models were trained on the same corpus, one linted
 with these rules and one not. The unlinted twin fabricated sensory claims —
 invented sighs, sounds, overheard conversation — that the linted twin did
 not (5/8 vs 7/8 on the record's percept-integrity probes). One run, one
-subject, honestly small; but it is the difference between "we think linting
-the training data matters" and a registered result where linting was the
-only variable.
+subject, honestly small — and weaker than "ablation" implies, because the
+control trains on a frozen older corpus rather than this one with filtering
+switched off, so linting is the intended variable but not the only one. The
+arms, the confound and what survives it are written up in
+[docs/ablation-cycle-004.md](docs/ablation-cycle-004.md).
 
 ## What it is NOT (the honest scope)
 
@@ -151,7 +153,7 @@ re-runs section A against a local Ollama.
 v0.3 — 2026-08-28. Engine + five rule packs (no-ambient-audio incl. the
 open-class "sound of X" and possessive frames; phenomenal/denial;
 memory-mechanism; conditional sight group; capability), 70 war-story tests,
-demo, measured deployment rate, and a pre-registered controlled ablation
+demo, measured deployment rate, and a pre-registered A/B arm
 result (above). v0.3 adds the `capability` pack from a live incident the day
 after release — the activity rules that had run in the source deployment for
 weeks but were never ported, and the presupposition rule that incident
