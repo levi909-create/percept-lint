@@ -1,6 +1,6 @@
 [project]
 name = "percept-lint"
-version = "0.2.2"
+version = "0.3.0"
 description = "Utterance-time honesty linting for AI companions: catches first-person claims of sensor data the agent has no sensor for."
 readme = "README.md"
 license = { file = "LICENSE" }

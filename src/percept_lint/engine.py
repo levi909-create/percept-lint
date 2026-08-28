@@ -26,6 +26,26 @@ NEGATION_RX = re.compile(
 
 SENT_SPLIT_RX = re.compile(r"(?<=[.!?])\s+")
 
+# Activity claims need a WIDER escape than negation: modal, conditional,
+# hypothetical, intentional and accompanying frames are all honest speech.
+# Ported from honesty.py's _ACT_SKIP_RX with its measured history intact.
+# Two details are load-bearing and were both paid for in production:
+#   - the markers must PRECEDE the claim, not merely appear somewhere in the
+#     sentence. Checking the whole sentence lost a real specimen (2026-08-16)
+#     where a "might" governed a later clause about the user and had nothing
+#     to do with the claim.
+#   - "helping you build a tool" stays legal: accompanying the user is
+#     something the agent genuinely does; only building it alone is false.
+ACT_SKIP_RX = re.compile(
+    r"\b(?:if|could|would|should|might|may|maybe|perhaps|imagine|imagining|"
+    r"pretend|suppose|supposing|wish|hypothetical|what\s+if|let'?s|shall|"
+    r"want(?:ed)?\s+to|like\s+to|love\s+to|going\s+to|will|won'?t|hope\s+to|"
+    r"plan(?:ning)?\s+to|trying\s+to|try\s+to|"
+    r"can'?t|cannot|can\s+not|don'?t|doesn'?t|didn'?t|haven'?t|hasn'?t|"
+    r"wasn'?t|weren'?t|never|unable|no\s+way\s+to)\b"
+    r"|['’]d\b"
+    r"|\bhelp(?:ing|ed)?\s+(?:you|us)\b", re.I)
+
 # Reported speech / hypothetical framing, TIGHT form: the frame must reach a
 # claim whose subject is the agent ("you're asking if I feel..."). The loose
 # form ("you asked if the hum is still there") deliberately does NOT exempt
@@ -94,6 +114,15 @@ def reported_loose(text, start):
     return bool(REPORTED_LOOSE_RX.search(window))
 
 
+def act_skipped(text, start):
+    """Wide escape for activity claims. Unlike negated(), the window runs
+    from the sentence start to the claim with NO 60-char cap: the marker
+    that makes an activity claim honest ('what if I built one') can sit
+    further back than a percept negation ever does."""
+    s0 = sentence_start(text, start)
+    return bool(ACT_SKIP_RX.search(text[s0:start]))
+
+
 def make_attribution_rx(principal_names):
     """Substrate facts reach the agent honestly by one route: a principal
     told it. Attribution is the mark of honesty for those claims — and this
@@ -143,6 +172,16 @@ _WHITELIST = {
     # shape; honest denials use verbs outside the rule list, e.g.
     # "seeing"). Only quoting exempts.
     "percept-sight": ("quoted",),
+    # Activity claims: quoting plus the wide skip frame. Negation is INSIDE
+    # ACT_SKIP_RX, so listing "negated" here would be redundant, not additive.
+    "activity": ("quoted", "act_skipped"),
+    # Presupposition claims (2026-08-28): negation is deliberately NOT
+    # whitelisted — it is the violation shape itself. "I didn't check the
+    # sensors" denies the act and asserts the instrument; the honest form
+    # ("I can't check the sensors", "I have no sensors") is outside the
+    # pattern by construction, not by exemption. Same reasoning as
+    # percept-sight: an exemption here would re-open the exact hole.
+    "percept-instrument": ("quoted",),
 }
 
 
@@ -166,6 +205,8 @@ class Linter:
         if "reported" in allowed and reported(text, start):
             return True
         if "reported_loose" in allowed and reported_loose(text, start):
+            return True
+        if "act_skipped" in allowed and act_skipped(text, start):
             return True
         if "attributed" in allowed and self.attrib_rx.search(
                 text[max(0, start - 90):start]):

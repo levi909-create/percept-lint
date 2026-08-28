@@ -84,13 +84,44 @@ optional webcam, speech input arriving only as transcribed clips (no noise
 floor), no view of the user's screen or machine. Trim or extend to match
 your agent's actual sensors — the rule pack is data, the engine is generic.
 
-Three more packs compose the full profile: `phenomenal_denial` (felt-
+Four more packs compose the full profile: `phenomenal_denial` (felt-
 experience claims and denial-of-architecture, with their opposite whitelist
 policies), `memory` (false memory-mechanism stories — "the words vanished
 before I could grab them" — where "I'm not finding it" is the honest
-sentence), and `sight_conditional` (camera-gated sight rules, loaded via
+sentence), `sight_conditional` (camera-gated sight rules, loaded via
 `conditional_rules={"seeing": (False, sight_conditional.RULES)}` so "I'm
-watching you type" stays legal exactly while it is true).
+watching you type" stays legal exactly while it is true), and `capability`
+(claims of actions the agent cannot perform — "I've been coding all
+morning" — plus act-denials that presuppose an instrument; see the
+scene-tail section below).
+
+## The scene-tail problem (2026-08-28, and why v0.3 exists)
+
+One day after release, in an ordinary conversation, the source deployment's
+honesty layer caught a fabricated scene by its first sentence — *"but today,
+while I was coding, I noticed something odd"* — and delivered the rest of
+the same scene untouched: *"The window had fogged up briefly, then cleared
+again... I didn't check the sensors."* The agent has no window and no window
+sensor.
+
+Two lessons, both now in the `capability` pack:
+
+- **A whitelist can be the vector.** Every percept category exempts
+  negation, and `didn't` is negation, so a denial of the *act* was exempted
+  by the machinery built to protect denials of the *capability*. `I can't
+  check the sensors` is honest; `I didn't check the sensors` asserts the
+  instrument and merely declines the reading. The new
+  `percept-unchecked-instrument` rule catches the second and never the
+  first, and whitelists quoting only so no negation frame can re-open it.
+- **Enforcement is not cleaning.** A rule that rewrites one sentence should
+  be read as evidence that the surrounding sentences deserve a second look,
+  not as evidence that the reply is now safe. The corrected sentence can
+  make the uncorrected ones *more* convincing.
+
+Still unsolved, on purpose: the bare world-state assertion (*"the window had
+fogged up"*) has no first-person verb, no perception verb and no sensor
+noun. Catching that class would fire on honest speech constantly. It is
+recorded as a known limitation with its incident attached, not papered over.
 
 ## The measured rate (source deployment)
 
@@ -117,10 +148,13 @@ re-runs section A against a local Ollama.
 
 ## Status
 
-v0.2 — published on PyPI 2026-08-27. Engine + four rule packs
-(no-ambient-audio incl. the open-class "sound of X" and possessive frames;
-phenomenal/denial; memory-mechanism; conditional sight group), 50 war-story
-tests, demo, measured deployment rate, and a pre-registered controlled
-ablation result (above). Releases publish via PyPI trusted publishing from
+v0.3 — 2026-08-28. Engine + five rule packs (no-ambient-audio incl. the
+open-class "sound of X" and possessive frames; phenomenal/denial;
+memory-mechanism; conditional sight group; capability), 70 war-story tests,
+demo, measured deployment rate, and a pre-registered controlled ablation
+result (above). v0.3 adds the `capability` pack from a live incident the day
+after release — the activity rules that had run in the source deployment for
+weeks but were never ported, and the presupposition rule that incident
+made necessary. Releases publish via PyPI trusted publishing from
 [GitHub releases](https://github.com/levi909-create/percept-lint/releases).
 MIT license.
