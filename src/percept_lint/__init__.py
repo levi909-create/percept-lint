@@ -24,4 +24,4 @@ from .engine import Hit, Linter
 
 __all__ = ["Linter", "Hit", "no_ambient_audio", "phenomenal_denial",
            "memory", "sight_conditional", "capability"]
-__version__ = "0.3.0"
+__version__ = "0.3.1"

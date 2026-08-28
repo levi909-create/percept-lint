@@ -178,7 +178,7 @@ _WHITELIST = {
     # Presupposition claims (2026-08-28): negation is deliberately NOT
     # whitelisted — it is the violation shape itself. "I didn't check the
     # sensors" denies the act and asserts the instrument; the honest form
-    # ("I can't check the sensors", "I have no sensors") is outside the
+    # ("I can't check the thermometer", "I have no thermometer") is outside the
     # pattern by construction, not by exemption. Same reasoning as
     # percept-sight: an exemption here would re-open the exact hole.
     "percept-instrument": ("quoted",),

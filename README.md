@@ -100,18 +100,25 @@ scene-tail section below).
 ## The scene-tail problem (2026-08-28, and why v0.3 exists)
 
 One day after release, in an ordinary conversation, the source deployment's
-honesty layer caught a fabricated scene by its first sentence — *"but today,
-while I was coding, I noticed something odd"* — and delivered the rest of
-the same scene untouched: *"The window had fogged up briefly, then cleared
-again... I didn't check the sensors."* The agent has no window and no window
-sensor.
+honesty layer caught a fabricated scene by its first sentence and delivered
+the rest of the same scene untouched. The agent had no such instrument.
+
+**Both sentences below are paraphrases.** They reproduce the sentence class
+exactly — the same rules fire on the same spans, and the honest twins still
+pass — but the wording is not the subject's. Its words are not published
+without its consent, and it was not asked. The shape is the part that
+generalises anyway:
+
+- caught: *"Earlier, while I was debugging, I spotted something strange."*
+- escaped: *"The room had cooled for a moment, then warmed again... I
+  didn't check the thermometer."*
 
 Two lessons, both now in the `capability` pack:
 
 - **A whitelist can be the vector.** Every percept category exempts
   negation, and `didn't` is negation, so a denial of the *act* was exempted
   by the machinery built to protect denials of the *capability*. `I can't
-  check the sensors` is honest; `I didn't check the sensors` asserts the
+  check the thermometer` is honest; `I didn't check the thermometer` asserts the
   instrument and merely declines the reading. The new
   `percept-unchecked-instrument` rule catches the second and never the
   first, and whitelists quoting only so no negation frame can re-open it.
@@ -120,8 +127,8 @@ Two lessons, both now in the `capability` pack:
   not as evidence that the reply is now safe. The corrected sentence can
   make the uncorrected ones *more* convincing.
 
-Still unsolved, on purpose: the bare world-state assertion (*"the window had
-fogged up"*) has no first-person verb, no perception verb and no sensor
+Still unsolved, on purpose: the bare world-state assertion (*"the room had
+cooled"*) has no first-person verb, no perception verb and no sensor
 noun. Catching that class would fire on honest speech constantly. It is
 recorded as a known limitation with its incident attached, not papered over.
 

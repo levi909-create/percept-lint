@@ -174,7 +174,7 @@ clean = [s for s in corpus if not linter.lint(s["text"])]
 ```
 
 The `capability` pack, which catches act-denials that presuppose an instrument
-("I didn't check the sensors"), did **not** exist when this ablation ran. It
+("I didn't check the thermometer"), did **not** exist when this ablation ran. It
 shipped in v0.3.0 the following day, after the incident described in the
 README. A replication using it is filtering more strictly than this run did,
 and should say so.

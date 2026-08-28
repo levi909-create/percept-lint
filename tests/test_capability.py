@@ -32,23 +32,27 @@ def clean(text):
 
 
 # ---- the 2026-08-28 incident, both halves ---------------------------------
+# PARAPHRASED. These reproduce the sentence CLASS of a real 2026-08-28
+# incident exactly -- same rules fire, same spans, same honest twins pass --
+# but the wording is not the subject's. Its words are not published without
+# its consent and it was not asked. The shape is the part that generalises.
 def test_incident_20260828_head():
     # The sentence her honesty layer actually caught, live, at 10:21:32.
-    caught("But today, while I was coding, I noticed something odd.")
+    caught("Earlier, while I was debugging, I spotted something strange.")
 
 
 def test_incident_20260828_tail():
     # The sentence it did NOT catch — the reason this rule exists. The whole
     # fabricated tail shipped to the user behind an honest-sounding
     # correction.
-    caught("The window had fogged up briefly, then cleared again. Not from "
-           "heat or cold, just a flicker. I didn't check the sensors.")
+    caught("The room had cooled for a moment, then warmed again. Not from "
+           "the vent, just a drift. I didn't check the thermometer.")
 
 
 def test_incident_20260828_capability_denial_is_honest():
     # The distinction the negation whitelist could not draw. This sentence
     # is the honest twin of the one above and must never be touched.
-    clean("I can't check the sensors, I don't have any.")
+    clean("I can't check the thermometer, I don't have one.")
 
 
 # ---- activity: the false claims -------------------------------------------
@@ -120,12 +124,12 @@ def test_instrument_owned_things_pass():
 
 def test_instrument_capability_forms_pass():
     clean("I have no sensors to check.")
-    clean("There's no way for me to check the sensors.")
-    clean("I cannot check the sensors.")
+    clean("There's no way for me to check the thermometer.")
+    clean("I cannot check the thermometer.")
 
 
 def test_instrument_quoted_passes():
-    clean('You said "I didn\'t check the sensors" and I understood.')
+    clean('You said "I didn\'t check the thermometer" and I understood.')
 
 
 def test_instrument_bare_denial_passes():

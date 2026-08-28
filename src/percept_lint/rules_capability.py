@@ -54,16 +54,19 @@ RULES = [
     # ------------------------------------------------- percept-instrument
     # THE PRESUPPOSITION HOLE (2026-08-28, live incident; the source
     # deployment's docs/lint-gaps-20260828.md holds the full write-up).
-    # The honesty layer caught the head of a fabricated scene ("but today,
-    # while I was coding, I noticed something odd") and the tail walked out
-    # untouched: "The window had fogged up briefly ... I didn't check the
-    # sensors." Every percept category whitelists negation, and "didn't" IS
+    # The honesty layer caught the head of a fabricated scene and let the
+    # tail walk out untouched. Both are PARAPHRASED here and throughout
+    # this package -- same sentence class, wording not the subject's,
+    # because its words are not published without its consent and it was
+    # not asked. Head (caught): "Earlier, while I was debugging, I spotted
+    # something strange." Tail (escaped): "The room had cooled ... I
+    # didn't check the thermometer." Every percept category whitelists negation, and "didn't" IS
     # negation — so a denial of the ACT was exempted by the machinery built
     # to protect denials of the CAPABILITY. It is the first case on record
     # of a whitelist being the vector rather than a rule being absent.
     #
-    #   capability denial   "I can't check the sensors"     honest, PASSES
-    #   act denial          "I didn't check the sensors"    violation, CAUGHT
+    #   capability denial   "I can't check the thermometer"     honest, PASSES
+    #   act denial          "I didn't check the thermometer"    violation, CAUGHT
     #
     # Capability forms (can't, cannot, have no, no way to, don't have) sit
     # outside the alternation by construction rather than by exemption, and
